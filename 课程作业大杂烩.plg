@@ -6,34 +6,26 @@
 --------------------Configuration: 课程作业大杂烩 - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\Wendy\AppData\Local\Temp\RSP5896.tmp" with contents
+Creating temporary file "C:\Users\Wendy\AppData\Local\Temp\RSP89DF.tmp" with contents
 [
 /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp"Debug/课程作业大杂烩.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
-"E:\vcprogram\课程作业大杂烩\MainFrm.cpp"
-"E:\vcprogram\课程作业大杂烩\课程作业大杂烩.cpp"
-"E:\vcprogram\课程作业大杂烩\课程作业大杂烩View.cpp"
+"C:\Users\Wendy\Desktop\MyMFCprogram\课程作业大杂烩View.cpp"
 ]
-Creating command line "cl.exe @C:\Users\Wendy\AppData\Local\Temp\RSP5896.tmp" 
-Creating temporary file "C:\Users\Wendy\AppData\Local\Temp\RSP5897.tmp" with contents
+Creating command line "cl.exe @C:\Users\Wendy\AppData\Local\Temp\RSP89DF.tmp" 
+Creating temporary file "C:\Users\Wendy\AppData\Local\Temp\RSP89E0.tmp" with contents
 [
 /nologo /subsystem:windows /incremental:yes /pdb:"Debug/课程作业大杂烩.pdb" /debug /machine:I386 /out:"Debug/课程作业大杂烩.exe" /pdbtype:sept 
-".\Debug\GrapicSetting.obj"
-".\Debug\MainFrm.obj"
-".\Debug\StdAfx.obj"
+.\Debug\GrapicSetting.obj
+.\Debug\MainFrm.obj
+.\Debug\StdAfx.obj
 ".\Debug\课程作业大杂烩.obj"
 ".\Debug\课程作业大杂烩Doc.obj"
 ".\Debug\课程作业大杂烩View.obj"
 ".\Debug\课程作业大杂烩.res"
 ]
-Creating command line "link.exe @C:\Users\Wendy\AppData\Local\Temp\RSP5897.tmp"
+Creating command line "link.exe @C:\Users\Wendy\AppData\Local\Temp\RSP89E0.tmp"
 <h3>Output Window</h3>
 Compiling...
-MainFrm.cpp
-e:\vcprogram\课程作业大杂烩\mainfrm.cpp(4) : warning C4652: compiler option 'Generate Browser Info' inconsistent with precompiled header; current command-line option will override that defined in the precompiled header
-课程作业大杂烩.cpp
-e:\vcprogram\课程作业大杂烩\课程作业大杂烩.cpp(4) : warning C4652: compiler option 'Generate Browser Info' inconsistent with precompiled header; current command-line option will override that defined in the precompiled header
-Generating Code...
-Skipping... (no relevant changes detected)
 课程作业大杂烩View.cpp
 Linking...
 

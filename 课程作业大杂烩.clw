@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CGrapicSetting
+LastClass=CMyView
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "课程作业大杂烩.h"
@@ -40,7 +40,7 @@ ImplementationFile=课程作业大杂烩View.cpp
 Filter=C
 BaseClass=CView
 VirtualFilter=VWC
-LastObject=IDM_MODE_TEXT_EDIT
+LastObject=IDM_TEXT_LOAD
 
 
 [CLS:CMainFrame]
@@ -48,7 +48,7 @@ Type=0
 HeaderFile=MainFrm.h
 ImplementationFile=MainFrm.cpp
 Filter=T
-LastObject=IDM_MODE_DRAW
+LastObject=IDM_TEXT_SAVE
 BaseClass=CFrameWnd
 VirtualFilter=fWC
 
@@ -94,9 +94,11 @@ Command17=IDM_SHAPE
 Command18=IDM_COLOR
 Command19=IDM_EMPTY_CLIENT
 Command20=IDM_SET_FONT
-Command21=IDM_MODE_DRAW
-Command22=IDM_MODE_TEXT_EDIT
-CommandCount=22
+Command21=IDM_TEXT_SAVE
+Command22=IDM_TEXT_LOAD
+Command23=IDM_MODE_DRAW
+Command24=IDM_MODE_TEXT_EDIT
+CommandCount=24
 
 [ACL:IDR_MAINFRAME]
 Type=1

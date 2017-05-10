@@ -20,12 +20,14 @@ IMPLEMENT_DYNCREATE(CMainFrame, CFrameWnd)
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	//{{AFX_MSG_MAP(CMainFrame)
 	ON_WM_CREATE()
+	ON_WM_TIMER()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
 {
 	ID_SEPARATOR,           // status line indicator
+	IDS_TIMER,
 	ID_INDICATOR_CAPS,
 	ID_INDICATOR_NUM,
 	ID_INDICATOR_SCRL,
@@ -70,6 +72,18 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	EnableDocking(CBRS_ALIGN_ANY);
 	DockControlBar(&m_wndToolBar);
 
+	//new toolbar
+	CTime t = CTime::GetCurrentTime();
+	CString str = t.Format("%H:%M:%S");
+	//m_wndStatusBar.SetPaneText(1,str);
+	CClientDC dc(this);
+	CSize sz = dc.GetTextExtent(str);
+	int index=0;
+	index = m_wndStatusBar.CommandToIndex(IDS_TIMER);
+	m_wndStatusBar.SetPaneInfo(index,IDS_TIMER,SBPS_NORMAL,sz.cx);
+	m_wndStatusBar.SetPaneText(index,str);
+	SetTimer(1,1000,NULL);
+
 	return 0;
 }
 
@@ -106,7 +120,18 @@ void CMainFrame::Dump(CDumpContext& dc) const
 
 
 
+void CMainFrame::OnTimer(UINT nIDEvent) 
+{
+	// TODO: Add your message handler code here and/or call default
+	
+	
+	CTime t = CTime::GetCurrentTime();
+	CString str = t.Format("%H:%M:%S");
 
+	CClientDC dc(this);
+	CSize sz = dc.GetTextExtent(str);
+	m_wndStatusBar.SetPaneInfo(1,IDS_TIMER,SBPS_NORMAL,sz.cx);
+	m_wndStatusBar.SetPaneText(1,str);
 
-
-
+	CFrameWnd::OnTimer(nIDEvent);
+}

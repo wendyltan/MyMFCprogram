@@ -146,6 +146,8 @@ BEGIN
     POPUP "文本编辑"
     BEGIN
         MENUITEM "字体设置",                    IDM_SET_FONT
+        MENUITEM "文本保存",                    IDM_TEXT_SAVE
+        MENUITEM "文本载入",                    IDM_TEXT_LOAD
     END
     POPUP "模式变更"
     BEGIN
@@ -408,6 +410,7 @@ END
 STRINGTABLE DISCARDABLE 
 BEGIN
     AFX_IDS_PREVIEW_CLOSE   "关闭打印预览模式\n取消预阅"
+    IDS_TIMER               "时钟"
 END
 
 #endif    // Chinese (中国) resources

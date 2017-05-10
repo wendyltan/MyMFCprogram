@@ -30,6 +30,8 @@ BEGIN_MESSAGE_MAP(CMyView, CView)
 	ON_COMMAND(IDM_MODE_DRAW, OnModeDraw)
 	ON_COMMAND(IDM_MODE_TEXT_EDIT, OnModeTextEdit)
 	ON_WM_CREATE()
+	ON_COMMAND(IDM_TEXT_SAVE, OnTextSave)
+	ON_COMMAND(IDM_TEXT_LOAD, OnTextLoad)
 	//}}AFX_MSG_MAP
 	// Standard printing commands
 	ON_COMMAND(ID_FILE_PRINT, CView::OnFilePrint)
@@ -180,32 +182,35 @@ void CMyView::OnLButtonDown(UINT nFlags, CPoint point)
 void CMyView::OnLButtonUp(UINT nFlags, CPoint point) 
 {
 	// TODO: Add your message handler code here and/or call default
-	CClientDC dc(this);
-	CPen pen(m_LineStyle,m_LineWidth,m_clr);
-	CPen *pOldpen = m_dcMetaFile.SelectObject(&pen);
-
-	CBrush *pBrush = CBrush::FromHandle((HBRUSH)GetStockObject(NULL_BRUSH));
-	m_dcMetaFile.SelectObject(pBrush);
-
-	switch(m_ShapeIndex)
+	if(m_modeID==0)
 	{
-	case 1://draw dot
-		 m_dcMetaFile.SetPixel(point,m_clr);
-		 Invalidate();
-		 break;
-    case 2://draw line
-		 m_dcMetaFile.MoveTo(m_ptOrigin);
-		 m_dcMetaFile.LineTo(point);
-		 Invalidate();
-		 break;
-	case 3://draw rectangle
-		m_dcMetaFile.Rectangle(CRect(m_ptOrigin,point));
-		Invalidate();
-		 break;
-	case 4:
-	    m_dcMetaFile.Ellipse(CRect(m_ptOrigin,point));
-		Invalidate();
-		 break;
+		CClientDC dc(this);
+		CPen pen(m_LineStyle,m_LineWidth,m_clr);
+		CPen *pOldpen = m_dcMetaFile.SelectObject(&pen);
+
+		CBrush *pBrush = CBrush::FromHandle((HBRUSH)GetStockObject(NULL_BRUSH));
+		m_dcMetaFile.SelectObject(pBrush);
+
+		switch(m_ShapeIndex)
+		{
+		case 1://draw dot
+			 m_dcMetaFile.SetPixel(point,m_clr);
+			 Invalidate();
+			 break;
+		case 2://draw line
+			 m_dcMetaFile.MoveTo(m_ptOrigin);
+			 m_dcMetaFile.LineTo(point);
+			 Invalidate();
+			 break;
+		case 3://draw rectangle
+			m_dcMetaFile.Rectangle(CRect(m_ptOrigin,point));
+			Invalidate();
+			 break;
+		case 4:
+			m_dcMetaFile.Ellipse(CRect(m_ptOrigin,point));
+			Invalidate();
+			 break;
+		}
 	}
 
 
@@ -249,6 +254,9 @@ void CMyView::OnModeDraw()
 	m_modeID = 0;
 	OnEmptyClient();
 	HideCaret();
+	CString str;
+	str.Format("当前模式是：绘图模式");
+	GetParent()->GetDescendantWindow(AFX_IDW_STATUS_BAR)->SetWindowText(str);
 }
 
 void CMyView::OnModeTextEdit() 
@@ -256,21 +264,25 @@ void CMyView::OnModeTextEdit()
 	// TODO: Add your command handler code here
 	
 	m_modeID=1;
-	OnEmptyClient();
+	m_strLine.Empty();
+	//OnEmptyClient();
 
 	CClientDC dc(this);
 	m_ptOrigin.x = 0;
 	m_ptOrigin.y = 0;
-	dc.TextOut(m_ptOrigin.x,m_ptOrigin.y,m_strLine);
+	//dc.TextOut(m_ptOrigin.x,m_ptOrigin.y,m_strLine);
+	SetCaretPos(m_ptOrigin);
 	ShowCaret();
+
+	CString str;
+	str.Format("当前模式是：文本模式");
+	GetParent()->GetDescendantWindow(AFX_IDW_STATUS_BAR)->SetWindowText(str);
 }
 
 
 void CMyView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) 
 {
 	// TODO: Add your message handler code here and/or call default
-
-
 
 	if(m_modeID==1)
 	{
@@ -335,4 +347,52 @@ int CMyView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	
 	
 	return 0;
+}
+
+//can only save one line now
+void CMyView::OnTextSave() 
+{
+	// TODO: Add your command handler code here
+	if(m_modeID==1)
+	{
+		CFileDialog fileDlg(FALSE);
+		fileDlg.m_ofn.lpstrTitle="文本保存";
+		fileDlg.m_ofn.lpstrFilter="Text Files(*.txt)\0*.txt\0All Files(*.*)\0*.*\0\0";
+		fileDlg.m_ofn.lpstrDefExt="txt";
+		if(IDOK==fileDlg.DoModal())
+		{
+			CFile file(fileDlg.GetFileName(),CFile::modeCreate|CFile::modeWrite);
+			file.Write(m_strLine,strlen(m_strLine));
+			file.Close();
+		}
+	}
+	
+}
+
+//can no be shown on client area now
+void CMyView::OnTextLoad() 
+{
+	// TODO: Add your command handler code here
+	if(m_modeID==1)
+	{
+		OnEmptyClient();
+		CFileDialog fileDlg(TRUE);
+		fileDlg.m_ofn.lpstrTitle = "文本打开";
+		fileDlg.m_ofn.lpstrFilter="Text Files(*.txt)\0*.txt\0All Files(*.*)\0*.*\0\0";
+		if(IDOK == fileDlg.DoModal())
+		{
+			CFile file(fileDlg.GetFileName(),CFile::modeRead);
+			char *pBuf;
+			DWORD dwFileLen;
+			dwFileLen = file.GetLength();
+			pBuf=new char[dwFileLen+1];
+			pBuf[dwFileLen]=0;
+			file.Read(pBuf,dwFileLen);
+			file.Close();
+			MessageBox(pBuf);
+			//CClientDC dc(this);
+			//dc.TextOut(0,0,pBuf,strlen(pBuf));
+			//m_strLine  = pBuf;
+		}	
+	}
 }

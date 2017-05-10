@@ -58,6 +58,8 @@ protected:
 	afx_msg void OnModeDraw();
 	afx_msg void OnModeTextEdit();
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg void OnTextSave();
+	afx_msg void OnTextLoad();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:
