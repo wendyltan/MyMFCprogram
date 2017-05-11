@@ -10,6 +10,13 @@
 #endif // _MSC_VER > 1000
 
 #include "GrapicSetting.h"
+
+typedef struct imageinfo
+{
+	CPoint point;
+	CString string;
+}ImageInfo;
+
 class CMyView : public CView
 {
 protected: // create from serialization only
@@ -63,6 +70,7 @@ protected:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:
+	int m_infoCounter;
 
 	CPoint m_ptOrigin;
 	COLORREF m_clr;
@@ -73,7 +81,8 @@ private:
 	CMetaFileDC m_dcMetaFile;
 	CString m_strFontName;
 	CFont m_font;
-	CString m_strLine;	
+	CString m_strLine;
+	ImageInfo info[100];
 public:
 	int m_modeID;
 };

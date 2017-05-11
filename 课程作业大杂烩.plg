@@ -6,13 +6,13 @@
 --------------------Configuration: 课程作业大杂烩 - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\Wendy\AppData\Local\Temp\RSP89DF.tmp" with contents
+Creating temporary file "C:\Users\Wendy\AppData\Local\Temp\RSPA4E0.tmp" with contents
 [
 /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp"Debug/课程作业大杂烩.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
 "C:\Users\Wendy\Desktop\MyMFCprogram\课程作业大杂烩View.cpp"
 ]
-Creating command line "cl.exe @C:\Users\Wendy\AppData\Local\Temp\RSP89DF.tmp" 
-Creating temporary file "C:\Users\Wendy\AppData\Local\Temp\RSP89E0.tmp" with contents
+Creating command line "cl.exe @C:\Users\Wendy\AppData\Local\Temp\RSPA4E0.tmp" 
+Creating temporary file "C:\Users\Wendy\AppData\Local\Temp\RSPA4E1.tmp" with contents
 [
 /nologo /subsystem:windows /incremental:yes /pdb:"Debug/课程作业大杂烩.pdb" /debug /machine:I386 /out:"Debug/课程作业大杂烩.exe" /pdbtype:sept 
 .\Debug\GrapicSetting.obj
@@ -23,7 +23,7 @@ Creating temporary file "C:\Users\Wendy\AppData\Local\Temp\RSP89E0.tmp" with con
 ".\Debug\课程作业大杂烩View.obj"
 ".\Debug\课程作业大杂烩.res"
 ]
-Creating command line "link.exe @C:\Users\Wendy\AppData\Local\Temp\RSP89E0.tmp"
+Creating command line "link.exe @C:\Users\Wendy\AppData\Local\Temp\RSPA4E1.tmp"
 <h3>Output Window</h3>
 Compiling...
 课程作业大杂烩View.cpp

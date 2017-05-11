@@ -42,6 +42,7 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CMyView construction/destruction
 
+
 CMyView::CMyView()
 {
 	// TODO: add construction code here
@@ -54,6 +55,7 @@ CMyView::CMyView()
 	m_strFontName="";
 	m_strLine = "";
 	m_modeID=0;
+	m_infoCounter = 0;
 }
 
 CMyView::~CMyView()
@@ -86,6 +88,22 @@ void CMyView::OnDraw(CDC* pDC)
 	m_dcMetaFile.PlayMetaFile(hmetaFile);
 	//释放元文件资源
 	DeleteMetaFile(hmetaFile);
+
+	
+	if(m_modeID==1)
+	{
+
+		int i=0;
+		int j = m_infoCounter;
+		while(j--)
+		{
+			pDC->TextOut(info[i].point.x,info[i].point.y,info[i].string);
+			i++;
+		}
+		
+	}
+
+
 
 }
 
@@ -171,6 +189,13 @@ void CMyView::OnLButtonDown(UINT nFlags, CPoint point)
 	if(m_modeID==1)
 	{
 		SetCaretPos(point);
+
+		//store the string and position first before delete it.
+
+		info[m_infoCounter].string = m_strLine;
+		info[m_infoCounter].point = point;
+		m_infoCounter++;
+
 		m_strLine.Empty();
 		m_ptOrigin = point;
 	}
@@ -254,6 +279,7 @@ void CMyView::OnModeDraw()
 	m_modeID = 0;
 	OnEmptyClient();
 	HideCaret();
+
 	CString str;
 	str.Format("当前模式是：绘图模式");
 	GetParent()->GetDescendantWindow(AFX_IDW_STATUS_BAR)->SetWindowText(str);
@@ -265,6 +291,7 @@ void CMyView::OnModeTextEdit()
 	
 	m_modeID=1;
 	m_strLine.Empty();
+	m_infoCounter = 0;
 	//OnEmptyClient();
 
 	CClientDC dc(this);
@@ -292,9 +319,15 @@ void CMyView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 	   if(0x0d == nChar)//回车字符十六进制值是0x0d，
 		{
 			//清空字符区，新的行输入
+		    info[m_infoCounter].string = m_strLine;
+			info[m_infoCounter].point = m_ptOrigin;
+			m_infoCounter++;
+
 			m_strLine.Empty();
 			//光标下移
 			m_ptOrigin.y += tm.tmHeight;
+
+			
 		}
 		else if(0x08 == nChar)//退格键是0x08
 		{
@@ -303,12 +336,24 @@ void CMyView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 			dc.TextOut(m_ptOrigin.x,m_ptOrigin.y,m_strLine);
 			//删减字符串，然后再打印一次字符串
 			m_strLine = m_strLine.Left(m_strLine.GetLength()-1);
+
 			dc.SetTextColor(clr);
+			
+			//更新数组里面字符串内容及位置
+			m_infoCounter--;
+			info[m_infoCounter].string = m_strLine;
+			info[m_infoCounter].point = m_ptOrigin;
+
 		}
 		else
 		{
 			//不是以上两种情况，则把字符串存到字符区
 			m_strLine += nChar;
+			//存储此时的字符串和位置。
+			info[m_infoCounter].string = m_strLine;
+			info[m_infoCounter].point = m_ptOrigin;
+			m_infoCounter++;
+
 		}
 		//获得插入字符宽度
 		CSize sz =dc.GetTextExtent(m_strLine);
@@ -318,6 +363,7 @@ void CMyView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 		pt.x = m_ptOrigin.x + sz.cx;
 		pt.y = m_ptOrigin.y;
 		SetCaretPos(pt);
+		
 
 		dc.TextOut(m_ptOrigin.x,m_ptOrigin.y,m_strLine);
 
