@@ -26,6 +26,7 @@ protected: // create from serialization only
 // Attributes
 public:
 	CMyDoc* GetDocument();
+	void DeleteandAdd();
 
 // Operations
 public:
@@ -70,6 +71,7 @@ protected:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:
+	int m_charCounter;
 	int m_infoCounter;
 
 	CPoint m_ptOrigin;

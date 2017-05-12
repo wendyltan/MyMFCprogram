@@ -56,6 +56,7 @@ CMyView::CMyView()
 	m_strLine = "";
 	m_modeID=0;
 	m_infoCounter = 0;
+	m_charCounter = 1;
 }
 
 CMyView::~CMyView()
@@ -93,6 +94,7 @@ void CMyView::OnDraw(CDC* pDC)
 	if(m_modeID==1)
 	{
 
+		DeleteandAdd();
 		int i=0;
 		int j = m_infoCounter;
 		while(j--)
@@ -194,7 +196,7 @@ void CMyView::OnLButtonDown(UINT nFlags, CPoint point)
 
 		info[m_infoCounter].string = m_strLine;
 		info[m_infoCounter].point = point;
-		m_infoCounter++;
+		//m_infoCounter++;
 
 		m_strLine.Empty();
 		m_ptOrigin = point;
@@ -306,7 +308,6 @@ void CMyView::OnModeTextEdit()
 	GetParent()->GetDescendantWindow(AFX_IDW_STATUS_BAR)->SetWindowText(str);
 }
 
-
 void CMyView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) 
 {
 	// TODO: Add your message handler code here and/or call default
@@ -316,12 +317,12 @@ void CMyView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 	    CClientDC dc(this);
 		TEXTMETRIC tm;
 		dc.GetTextMetrics(&tm);
+		
 	   if(0x0d == nChar)//回车字符十六进制值是0x0d，
 		{
 			//清空字符区，新的行输入
-		    info[m_infoCounter].string = m_strLine;
-			info[m_infoCounter].point = m_ptOrigin;
-			m_infoCounter++;
+			
+		    DeleteandAdd();
 
 			m_strLine.Empty();
 			//光标下移
@@ -340,21 +341,26 @@ void CMyView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 			dc.SetTextColor(clr);
 			
 			//更新数组里面字符串内容及位置
-			m_infoCounter--;
+
 			info[m_infoCounter].string = m_strLine;
 			info[m_infoCounter].point = m_ptOrigin;
 
 		}
-		else
+
+		//something wrong goes here
+		else if(0x0d!=nChar&&0x08!=nChar)
 		{
 			//不是以上两种情况，则把字符串存到字符区
 			m_strLine += nChar;
 			//存储此时的字符串和位置。
 			info[m_infoCounter].string = m_strLine;
-			info[m_infoCounter].point = m_ptOrigin;
+		
+			//info[m_infoCounter].point = m_ptOrigin;
+			m_charCounter++;
 			m_infoCounter++;
-
 		}
+		
+
 		//获得插入字符宽度
 		CSize sz =dc.GetTextExtent(m_strLine);
 		CPoint pt;
@@ -373,11 +379,6 @@ void CMyView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 	CView::OnChar(nChar, nRepCnt, nFlags);
 }
 
-
-
-
-
-
 int CMyView::OnCreate(LPCREATESTRUCT lpCreateStruct) 
 {
 	if (CView::OnCreate(lpCreateStruct) == -1)
@@ -395,12 +396,41 @@ int CMyView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
-//can only save one line now
+//handle for instant string saving
+void CMyView::DeleteandAdd()
+{
+	if(m_charCounter!=1) //表明当前前一个字符串占用多个m_info位。:h,he,hel,hell,hello...
+	{
+		int i;
+		i = m_charCounter;//给i赋值为当前charCounter数
+		info[m_infoCounter].string = m_strLine;
+				
+		while(m_charCounter>1)
+		{
+			m_infoCounter--;
+			info[m_infoCounter].string = "";
+			m_charCounter--;
+		}
+			info[m_infoCounter].string = info[m_infoCounter+i-1].string;
+			info[m_infoCounter+i-1].string = "";
+	}
+
+	info[m_infoCounter].point = m_ptOrigin;
+	m_infoCounter++;
+
+}
+
 void CMyView::OnTextSave() 
 {
 	// TODO: Add your command handler code here
-	if(m_modeID==1)
+
+	//表明保存时，最后一个字符串仍然在输入状态
+	
+	DeleteandAdd();
+
+	if(IDOK==MessageBox("Are u sure you want to save?")&&m_modeID==1)
 	{
+
 		CFileDialog fileDlg(FALSE);
 		fileDlg.m_ofn.lpstrTitle="文本保存";
 		fileDlg.m_ofn.lpstrFilter="Text Files(*.txt)\0*.txt\0All Files(*.*)\0*.*\0\0";
@@ -408,7 +438,18 @@ void CMyView::OnTextSave()
 		if(IDOK==fileDlg.DoModal())
 		{
 			CFile file(fileDlg.GetFileName(),CFile::modeCreate|CFile::modeWrite);
-			file.Write(m_strLine,strlen(m_strLine));
+			
+
+			int j = 0;
+			while(j<m_infoCounter)
+			{
+				file.Write(info[j].string,strlen(info[j].string));
+				file.Write("\n",strlen("\n"));
+				j++;
+			}
+
+			
+			
 			file.Close();
 		}
 	}
