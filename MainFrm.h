@@ -47,8 +47,6 @@ protected:
 	//{{AFX_MSG(CMainFrame)
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnTimer(UINT nIDEvent);
-	afx_msg void OnModeDraw();
-	afx_msg void OnModeTextEdit();
 	afx_msg void OnUpdateModeDraw(CCmdUI* pCmdUI);
 	afx_msg void OnUpdateModeTextEdit(CCmdUI* pCmdUI);
 	//}}AFX_MSG

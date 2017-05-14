@@ -21,8 +21,6 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	//{{AFX_MSG_MAP(CMainFrame)
 	ON_WM_CREATE()
 	ON_WM_TIMER()
-	ON_COMMAND(IDM_MODE_DRAW, OnModeDraw)
-	ON_COMMAND(IDM_MODE_TEXT_EDIT, OnModeTextEdit)
 	ON_UPDATE_COMMAND_UI(IDM_MODE_DRAW, OnUpdateModeDraw)
 	ON_UPDATE_COMMAND_UI(IDM_MODE_TEXT_EDIT, OnUpdateModeTextEdit)
 	//}}AFX_MSG_MAP
@@ -43,6 +41,7 @@ static UINT indicators[] =
 CMainFrame::CMainFrame()
 {
 	// TODO: add member initialization code here
+	m_bAutoMenuEnable = FALSE;
 }
 
 CMainFrame::~CMainFrame()
@@ -142,28 +141,20 @@ void CMainFrame::OnTimer(UINT nIDEvent)
 	CFrameWnd::OnTimer(nIDEvent);
 }
 
-void CMainFrame::OnModeDraw() 
-{
-	// TODO: Add your command handler code here
-
-
-}
-
-void CMainFrame::OnModeTextEdit() 
-{
-	// TODO: Add your command handler code here
-
-
-}
-
 
 void CMainFrame::OnUpdateModeDraw(CCmdUI* pCmdUI) 
 {
 	// TODO: Add your command update UI handler code here
 
 
-	GetMenu()->EnableMenuItem(5,MF_BYPOSITION   |MF_DISABLED);
-	GetMenu()->EnableMenuItem(4,MF_BYPOSITION   |MF_ENABLED );
+	//GetMenu()->EnableMenuItem(5,MF_BYPOSITION   |MF_DISABLED);
+	for(int i=0;i<3;i++)
+	{
+		GetMenu()->GetSubMenu(4)->EnableMenuItem(i,MF_BYPOSITION|MF_DISABLED);	
+		GetMenu()->GetSubMenu(5)->EnableMenuItem(i,MF_BYPOSITION|MF_ENABLED);
+	}
+	
+
 
 }
 
@@ -171,9 +162,11 @@ void CMainFrame::OnUpdateModeTextEdit(CCmdUI* pCmdUI)
 {
 	// TODO: Add your command update UI handler code herev	
 
-
-	GetMenu()->EnableMenuItem(4,MF_BYPOSITION   |MF_DISABLED );
-	GetMenu()->EnableMenuItem(5,MF_BYPOSITION   |MF_ENABLED  );	
+	for(int i=0;i<3;i++)
+	{
+		GetMenu()->GetSubMenu(5)->EnableMenuItem(i,MF_BYPOSITION|MF_DISABLED);	
+		GetMenu()->GetSubMenu(4)->EnableMenuItem(i,MF_BYPOSITION|MF_ENABLED);
+	}
 	
 
 }
