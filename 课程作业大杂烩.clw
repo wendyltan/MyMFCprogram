@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CMyView
+LastClass=CMainFrame
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "课程作业大杂烩.h"
@@ -48,7 +48,7 @@ Type=0
 HeaderFile=MainFrm.h
 ImplementationFile=MainFrm.cpp
 Filter=T
-LastObject=IDM_TEXT_SAVE
+LastObject=IDM_MODE_TEXT_EDIT
 BaseClass=CFrameWnd
 VirtualFilter=fWC
 

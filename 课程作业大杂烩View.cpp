@@ -57,6 +57,7 @@ CMyView::CMyView()
 	m_modeID=0;
 	m_infoCounter = 0;
 	m_charCounter = 1;
+	
 }
 
 CMyView::~CMyView()
@@ -102,6 +103,7 @@ void CMyView::OnDraw(CDC* pDC)
 			pDC->TextOut(info[i].point.x,info[i].point.y,info[i].string);
 			i++;
 		}
+
 		
 	}
 
@@ -194,6 +196,7 @@ void CMyView::OnLButtonDown(UINT nFlags, CPoint point)
 
 		//store the string and position first before delete it.
 
+		DeleteandAdd();
 		info[m_infoCounter].string = m_strLine;
 		info[m_infoCounter].point = point;
 		//m_infoCounter++;
@@ -249,7 +252,10 @@ void CMyView::OnLButtonUp(UINT nFlags, CPoint point)
 void CMyView::OnSetFont() 
 {
 	// TODO: Add your command handler code here
+
+
 	CFontDialog dlg;
+
 	if(IDOK==dlg.DoModal())
 	{
 		m_font.CreateFontIndirect(dlg.m_cf.lpLogFont);
@@ -259,6 +265,7 @@ void CMyView::OnSetFont()
 	{
 		m_font.DeleteObject();
 	}
+
 	Invalidate();
 }
 
@@ -296,7 +303,7 @@ void CMyView::OnModeTextEdit()
 	m_infoCounter = 0;
 	//OnEmptyClient();
 
-	CClientDC dc(this);
+	//CClientDC dc(this);
 	m_ptOrigin.x = 0;
 	m_ptOrigin.y = 0;
 	//dc.TextOut(m_ptOrigin.x,m_ptOrigin.y,m_strLine);
@@ -317,6 +324,7 @@ void CMyView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 	    CClientDC dc(this);
 		TEXTMETRIC tm;
 		dc.GetTextMetrics(&tm);
+		 
 		
 	   if(0x0d == nChar)//回车字符十六进制值是0x0d，
 		{
@@ -370,7 +378,6 @@ void CMyView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 		pt.y = m_ptOrigin.y;
 		SetCaretPos(pt);
 		
-
 		dc.TextOut(m_ptOrigin.x,m_ptOrigin.y,m_strLine);
 
 		
@@ -483,3 +490,4 @@ void CMyView::OnTextLoad()
 		}	
 	}
 }
+

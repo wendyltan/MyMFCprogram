@@ -21,6 +21,10 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	//{{AFX_MSG_MAP(CMainFrame)
 	ON_WM_CREATE()
 	ON_WM_TIMER()
+	ON_COMMAND(IDM_MODE_DRAW, OnModeDraw)
+	ON_COMMAND(IDM_MODE_TEXT_EDIT, OnModeTextEdit)
+	ON_UPDATE_COMMAND_UI(IDM_MODE_DRAW, OnUpdateModeDraw)
+	ON_UPDATE_COMMAND_UI(IDM_MODE_TEXT_EDIT, OnUpdateModeTextEdit)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -84,6 +88,8 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_wndStatusBar.SetPaneText(index,str);
 	SetTimer(1,1000,NULL);
 
+	
+	
 	return 0;
 }
 
@@ -134,4 +140,40 @@ void CMainFrame::OnTimer(UINT nIDEvent)
 	m_wndStatusBar.SetPaneText(1,str);
 
 	CFrameWnd::OnTimer(nIDEvent);
+}
+
+void CMainFrame::OnModeDraw() 
+{
+	// TODO: Add your command handler code here
+
+
+}
+
+void CMainFrame::OnModeTextEdit() 
+{
+	// TODO: Add your command handler code here
+
+
+}
+
+
+void CMainFrame::OnUpdateModeDraw(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+
+
+	GetMenu()->EnableMenuItem(5,MF_BYPOSITION   |MF_DISABLED);
+	GetMenu()->EnableMenuItem(4,MF_BYPOSITION   |MF_ENABLED );
+
+}
+
+void CMainFrame::OnUpdateModeTextEdit(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code herev	
+
+
+	GetMenu()->EnableMenuItem(4,MF_BYPOSITION   |MF_DISABLED );
+	GetMenu()->EnableMenuItem(5,MF_BYPOSITION   |MF_ENABLED  );	
+	
+
 }

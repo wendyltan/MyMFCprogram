@@ -71,6 +71,7 @@ protected:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:
+	
 	int m_charCounter;
 	int m_infoCounter;
 
