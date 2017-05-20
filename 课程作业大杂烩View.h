@@ -11,11 +11,11 @@
 
 #include "GrapicSetting.h"
 
-typedef struct imageinfo
+typedef struct textinfo
 {
 	CPoint point;
 	CString string;
-}ImageInfo;
+}TextInfo;
 
 class CMyView : public CView
 {
@@ -85,7 +85,7 @@ private:
 	CString m_strFontName;
 	CFont m_font;
 	CString m_strLine;
-	ImageInfo info[100];
+	TextInfo info[100];
 public:
 	int m_modeID;
 };

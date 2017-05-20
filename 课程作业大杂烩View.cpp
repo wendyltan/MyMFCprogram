@@ -98,6 +98,8 @@ void CMyView::OnDraw(CDC* pDC)
 		DeleteandAdd();
 		int i=0;
 		int j = m_infoCounter;
+		pDC->SelectObject(m_font);
+
 		while(j--)
 		{
 			pDC->TextOut(info[i].point.x,info[i].point.y,info[i].string);
@@ -249,23 +251,21 @@ void CMyView::OnLButtonUp(UINT nFlags, CPoint point)
 	CView::OnLButtonUp(nFlags, point);
 }
 
+
+
 void CMyView::OnSetFont() 
 {
 	// TODO: Add your command handler code here
 
-
 	CFontDialog dlg;
-
 	if(IDOK==dlg.DoModal())
-	{
-		m_font.CreateFontIndirect(dlg.m_cf.lpLogFont);
+	{	
+		CFont m_newfont;
+		m_newfont.CreateFontIndirect(dlg.m_cf.lpLogFont);
 		m_strFontName=dlg.m_cf.lpLogFont->lfFaceName;
+		m_font.m_hObject = m_newfont.m_hObject;
+		m_newfont.Detach();
 	}
-	if(m_font.m_hObject)
-	{
-		m_font.DeleteObject();
-	}
-
 	Invalidate();
 }
 
@@ -297,11 +297,11 @@ void CMyView::OnModeDraw()
 void CMyView::OnModeTextEdit() 
 {
 	// TODO: Add your command handler code here
-	
+
 	m_modeID=1;
 	m_strLine.Empty();
 	m_infoCounter = 0;
-	//OnEmptyClient();
+	OnEmptyClient();
 
 	//CClientDC dc(this);
 	m_ptOrigin.x = 0;
@@ -313,6 +313,7 @@ void CMyView::OnModeTextEdit()
 	CString str;
 	str.Format("当前模式是：文本模式");
 	GetParent()->GetDescendantWindow(AFX_IDW_STATUS_BAR)->SetWindowText(str);
+
 }
 
 void CMyView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) 
@@ -377,7 +378,11 @@ void CMyView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 		pt.x = m_ptOrigin.x + sz.cx;
 		pt.y = m_ptOrigin.y;
 		SetCaretPos(pt);
+
+		dc.SelectObject(m_font);
 		
+		
+
 		dc.TextOut(m_ptOrigin.x,m_ptOrigin.y,m_strLine);
 
 		

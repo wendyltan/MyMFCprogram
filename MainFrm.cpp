@@ -145,28 +145,22 @@ void CMainFrame::OnTimer(UINT nIDEvent)
 void CMainFrame::OnUpdateModeDraw(CCmdUI* pCmdUI) 
 {
 	// TODO: Add your command update UI handler code here
-
-
-	//GetMenu()->EnableMenuItem(5,MF_BYPOSITION   |MF_DISABLED);
-	for(int i=0;i<3;i++)
-	{
-		GetMenu()->GetSubMenu(4)->EnableMenuItem(i,MF_BYPOSITION|MF_DISABLED);	
-		GetMenu()->GetSubMenu(5)->EnableMenuItem(i,MF_BYPOSITION|MF_ENABLED);
-	}
-	
-
-
-}
-
-void CMainFrame::OnUpdateModeTextEdit(CCmdUI* pCmdUI) 
-{
-	// TODO: Add your command update UI handler code herev	
-
 	for(int i=0;i<3;i++)
 	{
 		GetMenu()->GetSubMenu(5)->EnableMenuItem(i,MF_BYPOSITION|MF_DISABLED);	
 		GetMenu()->GetSubMenu(4)->EnableMenuItem(i,MF_BYPOSITION|MF_ENABLED);
 	}
 	
+}
 
+void CMainFrame::OnUpdateModeTextEdit(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	for(int i=0;i<3;i++)
+	{
+		GetMenu()->GetSubMenu(4)->EnableMenuItem(i,MF_BYPOSITION|MF_DISABLED);	
+		GetMenu()->GetSubMenu(5)->EnableMenuItem(i,MF_BYPOSITION|MF_ENABLED);
+	}
+	
+	
 }
