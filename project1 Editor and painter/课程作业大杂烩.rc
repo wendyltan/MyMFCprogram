@@ -69,6 +69,7 @@ END
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON    DISCARDABLE     "res\\课程作业大杂烩.ico"
 IDR_MYTYPE              ICON    DISCARDABLE     "res\\课程作业大杂烩Doc.ico"
+IDI_ICON1               ICON    DISCARDABLE     "res\\icon1.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -85,16 +86,11 @@ IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
 IDR_MAINFRAME TOOLBAR DISCARDABLE  16, 15
 BEGIN
     BUTTON      ID_FILE_NEW
-    BUTTON      ID_FILE_OPEN
-    BUTTON      ID_FILE_SAVE
-    SEPARATOR
-    BUTTON      ID_EDIT_CUT
-    BUTTON      ID_EDIT_COPY
-    BUTTON      ID_EDIT_PASTE
-    SEPARATOR
-    BUTTON      ID_FILE_PRINT
     SEPARATOR
     BUTTON      ID_APP_ABOUT
+    SEPARATOR
+    BUTTON      IDT_MODE_DRAW
+    BUTTON      IDT_MODE_TEXT_EDIT
 END
 
 

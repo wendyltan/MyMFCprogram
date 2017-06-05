@@ -155,6 +155,10 @@ SOURCE=".\课程作业大杂烩View.h"
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 # Begin Source File
 
+SOURCE=.\res\icon1.ico
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\Toolbar.bmp
 # End Source File
 # Begin Source File

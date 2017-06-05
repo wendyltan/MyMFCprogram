@@ -49,6 +49,8 @@ protected:
 	afx_msg void OnTimer(UINT nIDEvent);
 	afx_msg void OnUpdateModeDraw(CCmdUI* pCmdUI);
 	afx_msg void OnUpdateModeTextEdit(CCmdUI* pCmdUI);
+	afx_msg void OnModeDrawT(CCmdUI* pCmdUI);
+	afx_msg void OnModeTextEditT(CCmdUI* pCmdUI);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 

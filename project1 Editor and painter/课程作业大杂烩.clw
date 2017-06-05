@@ -15,8 +15,8 @@ Class3=CMyView
 Class4=CMainFrame
 
 ResourceCount=3
-Resource1=IDR_MAINFRAME
-Resource2=IDD_ABOUTBOX
+Resource1=IDD_ABOUTBOX
+Resource2=IDR_MAINFRAME
 Class5=CAboutDlg
 Class6=CGrapicSetting
 Resource3=IDD_DIALOG1
@@ -48,7 +48,7 @@ Type=0
 HeaderFile=MainFrm.h
 ImplementationFile=MainFrm.cpp
 Filter=T
-LastObject=IDM_MODE_TEXT_EDIT
+LastObject=IDT_MODE_TEXT_EDIT
 BaseClass=CFrameWnd
 VirtualFilter=fWC
 
@@ -123,14 +123,10 @@ CommandCount=14
 Type=1
 Class=?
 Command1=ID_FILE_NEW
-Command2=ID_FILE_OPEN
-Command3=ID_FILE_SAVE
-Command4=ID_EDIT_CUT
-Command5=ID_EDIT_COPY
-Command6=ID_EDIT_PASTE
-Command7=ID_FILE_PRINT
-Command8=ID_APP_ABOUT
-CommandCount=8
+Command2=ID_APP_ABOUT
+Command3=IDT_MODE_DRAW
+Command4=IDT_MODE_TEXT_EDIT
+CommandCount=4
 
 [DLG:IDD_DIALOG1]
 Type=1

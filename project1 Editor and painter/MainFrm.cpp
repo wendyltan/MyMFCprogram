@@ -23,6 +23,8 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_WM_TIMER()
 	ON_UPDATE_COMMAND_UI(IDM_MODE_DRAW, OnUpdateModeDraw)
 	ON_UPDATE_COMMAND_UI(IDM_MODE_TEXT_EDIT, OnUpdateModeTextEdit)
+	ON_COMMAND(IDT_MODE_DRAW, OnModeDrawT)
+	ON_COMMAND(IDT_MODE_TEXT_EDIT, OnModeTextEditT)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -87,6 +89,8 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_wndStatusBar.SetPaneText(index,str);
 	SetTimer(1,1000,NULL);
 
+	SetClassLong(m_hWnd,GCL_HICON,(LONG)LoadIcon(AfxGetInstanceHandle(),MAKEINTRESOURCE(IDI_ICON1)));
+
 	
 	
 	return 0;
@@ -98,6 +102,10 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 		return FALSE;
 	// TODO: Modify the Window class or styles here by modifying
 	//  the CREATESTRUCT cs
+
+	cs.lpszName = "Painter and notepad";
+	cs.style = cs.style&~FWS_ADDTOTITLE;
+
 
 	return TRUE;
 }
@@ -162,5 +170,27 @@ void CMainFrame::OnUpdateModeTextEdit(CCmdUI* pCmdUI)
 		GetMenu()->GetSubMenu(5)->EnableMenuItem(i,MF_BYPOSITION|MF_ENABLED);
 	}
 	
+	
+}
+
+void CMainFrame::OnModeDrawT(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	for(int i=0;i<3;i++)
+	{
+		GetMenu()->GetSubMenu(5)->EnableMenuItem(i,MF_BYPOSITION|MF_DISABLED);	
+		GetMenu()->GetSubMenu(4)->EnableMenuItem(i,MF_BYPOSITION|MF_ENABLED);
+	}
+	
+}
+
+void CMainFrame::OnModeTextEditT(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	for(int i=0;i<3;i++)
+	{
+		GetMenu()->GetSubMenu(4)->EnableMenuItem(i,MF_BYPOSITION|MF_DISABLED);	
+		GetMenu()->GetSubMenu(5)->EnableMenuItem(i,MF_BYPOSITION|MF_ENABLED);
+	}
 	
 }
