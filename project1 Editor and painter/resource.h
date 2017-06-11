@@ -25,6 +25,7 @@
 #define IDM_TEXT_LOAD                   32782
 #define IDT_MODE_DRAW                   32786
 #define IDT_MODE_TEXT_EDIT              32787
+#define ID_MENUITEM32788                32788
 #define IDS_TIMER                       61446
 
 // Next default values for new objects
@@ -33,7 +34,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        140
-#define _APS_NEXT_COMMAND_VALUE         32788
+#define _APS_NEXT_COMMAND_VALUE         32789
 #define _APS_NEXT_CONTROL_VALUE         1009
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

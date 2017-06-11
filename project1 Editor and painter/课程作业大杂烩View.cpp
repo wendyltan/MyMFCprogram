@@ -242,6 +242,7 @@ void CMyView::OnLButtonUp(UINT nFlags, CPoint point)
 			m_dcMetaFile.Ellipse(CRect(m_ptOrigin,point));
 			Invalidate();
 			 break;
+
 		}
 	}
 

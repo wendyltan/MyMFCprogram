@@ -181,6 +181,8 @@ void CMainFrame::OnModeDrawT(CCmdUI* pCmdUI)
 		GetMenu()->GetSubMenu(5)->EnableMenuItem(i,MF_BYPOSITION|MF_DISABLED);	
 		GetMenu()->GetSubMenu(4)->EnableMenuItem(i,MF_BYPOSITION|MF_ENABLED);
 	}
+	CMyView *pView = (CMyView*)GetActiveView();
+	pView->m_modeID = 0;
 	
 }
 
@@ -192,5 +194,7 @@ void CMainFrame::OnModeTextEditT(CCmdUI* pCmdUI)
 		GetMenu()->GetSubMenu(4)->EnableMenuItem(i,MF_BYPOSITION|MF_DISABLED);	
 		GetMenu()->GetSubMenu(5)->EnableMenuItem(i,MF_BYPOSITION|MF_ENABLED);
 	}
+	CMyView *pView = (CMyView*)GetActiveView();
+	pView->m_modeID = 1;
 	
 }
