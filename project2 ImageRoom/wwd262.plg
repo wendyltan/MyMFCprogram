@@ -1,0 +1,60 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: wwd262 - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x804 /fo"Debug/wwd262.res" /d "_DEBUG" /d "_AFXDLL" "C:\Users\Wendy\Desktop\wwd262\wwd262.rc"" 
+Creating temporary file "C:\Users\Wendy\AppData\Local\Temp\RSP50EF.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/wwd262.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Users\Wendy\Desktop\wwd262\Bmp.cpp"
+"C:\Users\Wendy\Desktop\wwd262\DlgHistogram.cpp"
+"C:\Users\Wendy\Desktop\wwd262\MainFrm.cpp"
+"C:\Users\Wendy\Desktop\wwd262\wwd262.cpp"
+"C:\Users\Wendy\Desktop\wwd262\wwd262Doc.cpp"
+"C:\Users\Wendy\Desktop\wwd262\wwd262View.cpp"
+]
+Creating command line "cl.exe @C:\Users\Wendy\AppData\Local\Temp\RSP50EF.tmp" 
+Creating temporary file "C:\Users\Wendy\AppData\Local\Temp\RSP50F0.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/wwd262.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Users\Wendy\Desktop\wwd262\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\Users\Wendy\AppData\Local\Temp\RSP50F0.tmp" 
+Creating temporary file "C:\Users\Wendy\AppData\Local\Temp\RSP50F1.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/wwd262.pdb" /debug /machine:I386 /out:"Debug/wwd262.exe" /pdbtype:sept 
+.\Debug\Bmp.obj
+.\Debug\DlgHistogram.obj
+.\Debug\MainFrm.obj
+.\Debug\StdAfx.obj
+.\Debug\wwd262.obj
+.\Debug\wwd262Doc.obj
+.\Debug\wwd262View.obj
+.\Debug\wwd262.res
+]
+Creating command line "link.exe @C:\Users\Wendy\AppData\Local\Temp\RSP50F1.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+Bmp.cpp
+DlgHistogram.cpp
+MainFrm.cpp
+wwd262.cpp
+wwd262Doc.cpp
+wwd262View.cpp
+Generating Code...
+Linking...
+
+
+
+<h3>Results</h3>
+wwd262.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
